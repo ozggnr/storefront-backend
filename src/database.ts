@@ -14,8 +14,8 @@ const {
 //connection to database
 const client = new Pool({
     host: POSTGRES_HOST,
-    database: POSTGRES_USER,
-    user: POSTGRES_PASSWORD,
-    password: POSTGRES_DB
+    database: POSTGRES_DB,
+    user: POSTGRES_USER,
+    password: POSTGRES_PASSWORD
 })
 export default client
