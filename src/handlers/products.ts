@@ -9,7 +9,12 @@ const index = async (req: Request, res: Response) => {
     const productList = await products.index()
     res.json(productList)
 }
+const show = async (req: Request, res: Response) => {
+    const product = await products.show(req.params.id)
+    res.json(product)
+}
 const productRoutes = (app: express.Application) => {
     app.get('/products', index)
+    app.get('/products/:id', show)
 }
 export default productRoutes
