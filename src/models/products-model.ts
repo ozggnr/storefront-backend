@@ -1,5 +1,5 @@
 import client from '../database'
-
+import bcrypt from 'bcrypt'
 export type Product = {
     id: Number;
     name: string;
@@ -27,6 +27,19 @@ export class ProductDB {
             const connection = await client.connect()
             const query = 'SELECT * FROM products WHERE id = ($1);'
             const result = await connection.query(query, [id])
+            connection.release()
+            return result.rows[0]
+        } catch(error) {
+            throw new Error(`Cannot display this product ${error}`)
+        }
+    }
+    //create new product
+    async create(product: Product): Promise<Product> {
+        try {
+            const connection = await client.connect()
+            const query = 'INSERT INTO products (name, price) VALUES ($1, $2);'        
+            const result = await connection.query(query, [product.name, product.price])
+
             connection.release()
             return result.rows[0]
         } catch(error) {
