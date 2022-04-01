@@ -23,6 +23,17 @@ export class UserDB {
             throw new Error(`Ups! There is something wrong ${error}`)
         }
     }
+    async show(id: string): Promise<User> {
+        try {
+            const connection = await client.connect()
+            const query = 'SELECT * FROM users WHERE id = ($1)'
+            const result = await connection.query(query, [id])
+            connection.release()
+            return result.rows[0]
+        } catch(error) {
+            throw new Error(`Cannot find the user ${error}`)
+        }
+    }
     async create(user: User): Promise<User> {
         try {
             const connection = await client.connect()
@@ -34,5 +45,16 @@ export class UserDB {
         } catch(error) {
             throw new Error(`Cannot create new user ${error}`)
         }
+    }
+    //Check the users credentials when they sign in
+    async auth(email: string, password: string): Promise<User | null> {
+        const connection = await client.connect()
+        const query = 'SELECT email, password FROM users WHERE email=($1)'
+        const result = await connection.query(query, [email])
+        if (result.rows.length > 0) {
+            const user = result.rows[0]
+            if (bcrypt.compareSync(password + pepper, user.password)) return user
+        }
+        return null
     }
 }
