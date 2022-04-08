@@ -17,18 +17,14 @@ const show = async (req: Request, res: Response) => {
 }
 const create = async (req: Request, res: Response) => {
     const product: Product = {
-        id: req.body.id as Number,
         name: req.body.name as string,
         price: req.body.price as Number
     }
     try {
         const newProduct = await products.create(product)
-        const secret = process.env.TOKEN_SECRET || ''
-        var token = jwt.sign({user: newProduct}, secret)
-        res.json(token)
+        res.json(newProduct)
     } catch (error) {
         res.send('New product can not be added')
-
     }
 }
 const verifyAuthToken = async (req: Request, res: Response, next: Function) => {

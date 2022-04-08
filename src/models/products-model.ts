@@ -1,7 +1,7 @@
 import client from '../database'
 import bcrypt from 'bcrypt'
 export type Product = {
-    id: Number;
+    id?: Number;
     name: string;
     price: Number
 }
@@ -37,7 +37,7 @@ export class ProductDB {
     async create(product: Product): Promise<Product> {
         try {
             const connection = await client.connect()
-            const query = 'INSERT INTO products (name, price) VALUES ($1, $2);'        
+            const query = 'INSERT INTO products (name, price) VALUES ($1, $2) RETURNING *'        
             const result = await connection.query(query, [product.name, product.price])
 
             connection.release()
