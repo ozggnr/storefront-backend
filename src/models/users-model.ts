@@ -2,7 +2,7 @@ import client from '../database'
 import bcrypt from 'bcrypt'
 
 export type User = {
-    id: Number;
+    id?: Number;
     firstName: string;
     lastName: string;
     email: string;

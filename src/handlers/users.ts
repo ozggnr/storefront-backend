@@ -15,7 +15,6 @@ const show = async (req: Request, res: Response) => {
 }
 const create = async (req: Request, res: Response) => {
     const user: User = {
-        id: req.body.id as Number,
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,
@@ -23,9 +22,7 @@ const create = async (req: Request, res: Response) => {
     }
     try {
         const newUser = await users.create(user)
-        //Created new token for the user 
-        var token = jwt.sign({user: newUser}, secret)
-        res.json(token)
+        res.json(newUser)
     } catch (error) {
         res.status(400)
         res.send(`New user can not be added ${error}`)
