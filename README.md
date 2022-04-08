@@ -46,3 +46,5 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 #### Orders
 - Current Order by user (args: user id)[token required] - endpoint('/orders/users/:userId/active')
+
+Note: Related and detailed information can be found in [REQUIREMENTS.md](https://github.com/udacity/nd0067-c2-creating-an-api-with-postgresql-and-express-project-starter/blob/master/REQUIREMENTS.md)
