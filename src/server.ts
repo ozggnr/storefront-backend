@@ -17,3 +17,4 @@ userRoutes(app)
 orderRoutes(app)
 
 app.listen(3000, () => console.log('app is ready:)'))
+export default app
