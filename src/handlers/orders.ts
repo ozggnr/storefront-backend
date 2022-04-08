@@ -6,7 +6,6 @@ const orders = new OrderDB()
 const secret = process.env.TOKEN_SECRET || ''
 
 const show = async (req: Request, res: Response) => {
-    console.log('here', req.params)
     const order = await orders.show(req.params.userId)
     res.json(order)
 }
