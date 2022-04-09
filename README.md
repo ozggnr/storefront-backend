@@ -43,11 +43,19 @@ Following libraries used for the application:
 
 ## ENVIRONMENT VARIABLES
 POSTGRES_HOST='127.0.0.1'
+
 POSTGRES_USER=ozggnr
+
 POSTGRES_PASSWORD=magic_1234
+
 POSTGRES_DB=storefront
+
 POSTGRES_DB_TEST=storefront_test
+
 BCRYPT_PASSWORD=secretmagic1234
+
 SALT_ROUNDS=10
+
 TOKEN_SECRET=verysecrettoki
+
 ENV=dev
