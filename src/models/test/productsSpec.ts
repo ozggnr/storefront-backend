@@ -21,30 +21,16 @@ describe("Product", () => {
 			id: 3,
 			name: 'productC',
 			price: '123.25'
-		});
-	});
-	it('create method should add a product', async () => {
+		})
+	})
+	//this will create the fifth product when we run the tests
+	it('create method should add a new product and return to correct product name', async () => {
 		const response = await request.post('/products').send({
 			name: 'productX',
 			price: '300.50'
 		}).set("Authorization", `Bearer ${token}`)
-		expect(response.body).toEqual({
-			id: 5,
-			name: 'productX',
-			price: '300.50'
-		});
-	});
-	it('should have an index method', () => {
-		expect(product.index).toBeDefined();
-	});
-
-	it('should have a show method', () => {
-		expect(product.show).toBeDefined();
-	});
-
-	it('should have a create method', () => {
-		expect(product.create).toBeDefined();
-	});
+		expect(response.body.name).toBe('productX')
+	})
 	it('index method should return a list of products', async () => {
 		const result = await product.index();
 		expect(result.length).toBeGreaterThan(0);
@@ -53,6 +39,17 @@ describe("Product", () => {
 	it('show method should return the correct product', async () => {
 		const result = await product.show("1");
 		expect(result.id).toBe(1)
+	})
+	it('create method should add a new product', async () => {
+		const result = await product.create({
+			name: 'productY',
+			price: 12.50
+		})
+		expect(result).toEqual({
+			id: 6,
+			name: 'productY',
+			price: 12.50
+		})
 	})
 })
 

@@ -27,13 +27,19 @@ describe("User", () => {
 		}).set("Authorization", `Bearer ${token}`)
 		expect(response.body.email).toEqual('ozge@test.com')
 	})
-	it('should have an index method', () => {
-		expect(user.index).toBeDefined();
-	});
+	it('index method should return a list of users', async () => {
+		const result = await user.index();
+		expect(result.length).toBeGreaterThan(0);
+	})
 
-	it('should have a show method', () => {
-		expect(user.show).toBeDefined();
-	});
+	it('show method should return the user successfully', async () => {
+		const result = await user.show("3")
+		expect(result).toBeTruthy()
+	})
+	it('show method should return the user successfully', async () => {
+		const result = await user.show("3")
+		expect(result.id).toBe(3)
+	})
 
 	it('should have a create method', () => {
 		expect(user.create).toBeDefined();
