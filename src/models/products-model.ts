@@ -39,9 +39,13 @@ export class ProductDB {
             const connection = await client.connect()
             const query = 'INSERT INTO products (name, price) VALUES ($1, $2) RETURNING *'        
             const result = await connection.query(query, [product.name, product.price])
-
+            const newProduct = {
+                id: result.rows[0].id,
+                name: result.rows[0].name,
+                price: Number(result.rows[0].price)
+            }
             connection.release()
-            return result.rows[0]
+            return newProduct
         } catch(error) {
             throw new Error(`Cannot display this product ${error}`)
         }
