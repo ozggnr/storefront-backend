@@ -20,7 +20,7 @@ const verifyAuthToken = async (req: Request, res: Response, next: Function) => {
         res.send(`Invalid token`)
     }
 }
-const orderRoutes = (app: express.Application) => {
+const orderRoutes = (app: express.Application): void => {
     app.get('/orders/users/:userId/active', verifyAuthToken, show)
 }
 export default orderRoutes

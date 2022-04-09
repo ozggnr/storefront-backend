@@ -38,7 +38,7 @@ const verifyAuthToken = async (req: Request, res: Response, next: Function) => {
         res.send(`Invalid token`)
     }
 }
-const productRoutes = (app: express.Application) => {
+const productRoutes = (app: express.Application): void => {
     app.get('/products', index)
     app.get('/products/:id', show)
     app.post('/products', verifyAuthToken, create)
