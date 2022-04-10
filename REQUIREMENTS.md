@@ -18,26 +18,26 @@ These are the notes from a meeting with the frontend developer that describe wha
 #### Orders
 - Current Order by user (args: user id)[token required] (GET'/orders/users/:userId/active')
 
-## Data Shapes
-#### Product
-- id - INT
-- name - VARCHAR(255)
-- price - DECIMAL(6,2)
+## Database Schema/Shape
+#### Products
+- id SERIAL PRIMARY KEY NOT NULL,
+- name VARCHAR(255) NOT NULL,
+- price DECIMAL(6,2) NOT NULL
 
-#### User
-- id - INT
-- firstName - VARCHAR(255
-- lastName - VARCHAR(255)
-- email - VARCHAR(255)
-- password - VARCHAR(100)
+#### Users
+- id SERIAL PRIMARY KEY NOT NULL,
+- firstName VARCHAR(255) NOT NULL,
+- lastName VARCHAR(255) NOT NULL,
+- email VARCHAR(255) NOT NULL,
+- password VARCHAR(100) NOT NULL
 
 #### Orders
-- id - INT
-- userId - INT
-- statusOfOrder - VARCHAR(255) ('Active'/'Complete')
+- id SERIAL PRIMARY KEY NOT NULL,
+- userId INTEGER REFERENCES users(id),
+- statusOfOrder VARCHAR(255) NOT NULL --> It can be ('Active' or 'Complete')
 
-#### Order Products
-- id - INT
-- orderId - INT
-- productId - INT
-- quantity - INT
+#### Order_Products
+- id SERIAL PRIMARY KEY NOT NULL,
+- orderId INTEGER REFERENCES orders(id),
+- productId INTEGER REFERENCES products(id),
+- quantity INTEGER
