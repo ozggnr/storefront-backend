@@ -20,24 +20,24 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 ## Database Schema/Shape
 #### Products
-- id SERIAL PRIMARY KEY NOT NULL,
-- name VARCHAR(255) NOT NULL,
-- price DECIMAL(6,2) NOT NULL
+- id - SERIAL PRIMARY KEY NOT NULL,
+- name - VARCHAR(255) NOT NULL,
+- price - DECIMAL(6,2) NOT NULL
 
 #### Users
-- id SERIAL PRIMARY KEY NOT NULL,
-- firstName VARCHAR(255) NOT NULL,
-- lastName VARCHAR(255) NOT NULL,
-- email VARCHAR(255) NOT NULL,
-- password VARCHAR(100) NOT NULL
+- id - SERIAL PRIMARY KEY NOT NULL,
+- firstName - VARCHAR(255) NOT NULL,
+- lastName - VARCHAR(255) NOT NULL,
+- email - VARCHAR(255) NOT NULL,
+- password - VARCHAR(100) NOT NULL
 
 #### Orders
-- id SERIAL PRIMARY KEY NOT NULL,
-- userId INTEGER REFERENCES users(id),
-- statusOfOrder VARCHAR(255) NOT NULL --> It can be ('Active' or 'Complete')
+- id - SERIAL PRIMARY KEY NOT NULL,
+- userId - INTEGER REFERENCES users(id),
+- statusOfOrder - VARCHAR(255) NOT NULL --> It can be ('Active' or 'Complete')
 
 #### Order_Products
-- id SERIAL PRIMARY KEY NOT NULL,
-- orderId INTEGER REFERENCES orders(id),
-- productId INTEGER REFERENCES products(id),
-- quantity INTEGER
+- id - SERIAL PRIMARY KEY NOT NULL,
+- orderId - INTEGER REFERENCES orders(id),
+- productId - INTEGER REFERENCES products(id),
+- quantity - INTEGER
