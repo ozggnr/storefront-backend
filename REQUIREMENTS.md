@@ -20,18 +20,24 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 ## Data Shapes
 #### Product
--  id
-- name
-- price
+- id - INT
+- name - VARCHAR(255)
+- price - DECIMAL(6,2)
 
 #### User
-- id
-- firstName
-- lastName
-- password
+- id - INT
+- firstName - VARCHAR(255
+- lastName - VARCHAR(255)
+- email - VARCHAR(255)
+- password - VARCHAR(100)
 
 #### Orders
-- id
-- id of each product in the order
-- quantity of each product in the order
-- user_id
+- id - INT
+- userId - INT
+- statusOfOrder - VARCHAR(255) ('Active'/'Complete')
+
+#### Order Products
+- id - INT
+- orderId - INT
+- productId - INT
+- quantity - INT
