@@ -6,12 +6,20 @@ const users = new UserDB()
 const secret = process.env.TOKEN_SECRET || ''
 
 const index = async (req: Request, res: Response) => {
-    const userList = await users.index()
-    res.json(userList)
+    try {
+        const userList = await users.index()
+        res.json(userList)
+    } catch (error) {
+        res.send(`Cannot display users! Error is: ${error}`)
+    }
 }
 const show = async (req: Request, res: Response) => {
-    const user = await users.show(req.params.id)
-    res.json(user)
+    try {
+        const user = await users.show(req.params.id)
+        res.json(user) 
+    } catch (error) {
+        res.send(`Cannot display the user! Error is: ${error}`)
+    }
 }
 const create = async (req: Request, res: Response) => {
     const user: User = {
@@ -25,7 +33,7 @@ const create = async (req: Request, res: Response) => {
         res.json(newUser)
     } catch (error) {
         res.status(400)
-        res.send(`New user can not be added ${error}`)
+        res.send(`New user can not be added! Error is: ${error}`)
     }
 }
 //To check if user give the correct credentials
@@ -45,7 +53,7 @@ const auth = async (req: Request, res: Response) => {
         res.json(token)
     } catch (error) {
         res.status(401)
-        res.send(`New user can not be added ${error}`)
+        res.send(`New user can not be added! Error is: ${error}`)
     }
 }
 const verifyAuthToken = async (req: Request, res: Response, next: Function) => {

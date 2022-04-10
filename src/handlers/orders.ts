@@ -6,8 +6,12 @@ const orders = new OrderDB()
 const secret = process.env.TOKEN_SECRET || ''
 
 const show = async (req: Request, res: Response) => {
-    const order = await orders.show(req.params.userId)
-    res.json(order)
+    try {
+        const order = await orders.show(req.params.userId)
+        res.json(order)
+    } catch (error) {
+        res.send(`Cannot display the order! Error is ${error} `)
+    }
 }
 const verifyAuthToken = async (req: Request, res: Response, next: Function) => {
     try {

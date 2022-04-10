@@ -8,12 +8,20 @@ const secret = process.env.TOKEN_SECRET || ''
 //Connection to the model
 const index = async (req: Request, res: Response) => {
     //This will call associated method in model
-    const productList = await products.index()
-    res.json(productList)
+    try {
+        const productList = await products.index()
+        res.json(productList)
+    } catch (error) {
+        res.send(`Cannot display products! Error is: ${error}`)
+    }
 }
 const show = async (req: Request, res: Response) => {
-    const product = await products.show(req.params.id)
-    res.json(product)
+    try {
+        const product = await products.show(req.params.id)
+        res.json(product)
+    } catch (error) {
+        res.send(`Cannot display the product! Error is: ${error}`)
+    }
 }
 const create = async (req: Request, res: Response) => {
     const product: Product = {
@@ -24,7 +32,7 @@ const create = async (req: Request, res: Response) => {
         const newProduct = await products.create(product)
         res.json(newProduct)
     } catch (error) {
-        res.send('New product can not be added')
+        res.send(`New product can not be added! Error is: {error}`)
     }
 }
 const verifyAuthToken = async (req: Request, res: Response, next: Function) => {
